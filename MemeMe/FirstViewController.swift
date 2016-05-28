@@ -17,6 +17,7 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         var memedImage: UIImage
     }
 
+    @IBOutlet var wholeMemeView: UIView!
     @IBOutlet weak var topTextTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var memeToolBar: UIToolbar!
     @IBOutlet weak var memeNavBar: UINavigationBar!
@@ -100,16 +101,20 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if let userInfoDict = notification.userInfo, keyboardFrameValue = userInfoDict[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardFrame = keyboardFrameValue.CGRectValue().height
             UIView.animateWithDuration(0.8) {
-                self.bottomTextFieldConstraint.constant = -1 * (keyboardFrame)
-                self.view.layoutIfNeeded()
+                if (self.bottomTextField.isFirstResponder()) {
+                    self.wholeMemeView.frame.origin.y = keyboardFrame * -1
+                    self.view.layoutIfNeeded()
+                }
             }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         UIView.animateWithDuration(0.8) {
-            self.bottomTextFieldConstraint.constant = -45.0
-            self.view.layoutIfNeeded()
+            if (self.bottomTextField.isFirstResponder()) {
+                self.wholeMemeView.frame.origin.y = 0
+                self.view.layoutIfNeeded()
+            }
         }
     }
     

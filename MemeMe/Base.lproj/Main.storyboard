@@ -102,6 +102,7 @@
                         <outlet property="memeToolBar" destination="QUv-QN-yFd" id="guH-v6-fZ0"/>
                         <outlet property="topTextField" destination="l4Z-Ou-5Oh" id="ajS-pB-U95"/>
                         <outlet property="topTextTopConstraint" destination="LAl-HC-btY" id="fq0-vW-8SM"/>
+                        <outlet property="wholeMemeView" destination="8bC-Xf-vdC" id="MUl-7N-g9i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
