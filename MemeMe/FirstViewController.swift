@@ -170,18 +170,14 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func generateMemedImage() -> UIImage {
-        
-        //Hide toolbar and navbar
         memeToolBar.hidden = true
         memeNavBar.hidden = true
         
-        // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        //Show toolbar and navbar
         memeToolBar.hidden = false
         memeNavBar.hidden = false
         
