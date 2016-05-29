@@ -9,13 +9,6 @@
 import UIKit
 
 class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
-    struct Meme {
-        var topText: String
-        var bottomTexxt: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
 
     @IBOutlet var wholeMemeView: UIView!
     @IBOutlet weak var topTextTopConstraint: NSLayoutConstraint!
@@ -31,7 +24,6 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var albumButton: UIBarButtonItem!
     
     var combinedMeme: UIImage!
-    var savedMemes = [Meme]()
     
     @IBAction func pickAnImage(sender: AnyObject) {
         pickerControllerActions(.SavedPhotosAlbum)
@@ -42,13 +34,25 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func actionButtonActions(sender: UIBarButtonItem) {
-        combinedMeme = generateMemedImage()
-        let actViewController = UIActivityViewController(activityItems: [combinedMeme], applicationActivities: nil)
-        self.presentViewController(actViewController, animated: true, completion: nil)
-        saveMeme()
+        
+        if imageView.image != nil {
+            actionButton.enabled = true
+            combinedMeme = generateMemedImage()
+            
+            let actViewController = UIActivityViewController(activityItems: [combinedMeme], applicationActivities: nil)
+            actViewController.completionWithItemsHandler = { activity, success, items, error in
+                
+                if success {
+                    self.saveMeme()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }
+            presentViewController(actViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancelButtonAction(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
         initialStateOfMeme()
     }
 
@@ -142,8 +146,13 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func saveMeme() {
-        let currentMeme = Meme(topText: topTextField.text!, bottomTexxt: bottomTextField.text!, originalImage: imageView.image!, memedImage: combinedMeme)
+        let currentMeme = Meme(topText: topTextField.text!,
+                               bottomTexxt: bottomTextField.text!,
+                               originalImage: imageView.image!,
+                               memedImage: combinedMeme,
+                               index: memeIndex)
         savedMemes.append(currentMeme)
+        memeIndex += 1
     }
     
     func initialStateOfMeme() {
