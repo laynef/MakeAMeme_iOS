@@ -12,27 +12,14 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailImageView: UIImageView!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        detailImageView.image = currentMeme.memedImage
-        tabBarController?.tabBar.hidden = true
-        navigationController?.setToolbarHidden(true, animated: true)
-    }
+    var meme: Meme?
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.tabBar.hidden = false
-        navigationController?.setToolbarHidden(false, animated: false)
-    }
-
-    @IBAction func removeMeme(sender: AnyObject) {
-        savedMemes.removeAtIndex(currentMeme.index)
-        memeIndex -= 1
-    }
-
-    @IBAction func editMeme(sender: AnyObject) {
-        let memeEditorViewController = storyboard?.instantiateViewControllerWithIdentifier("FirstViewController") as! FirstViewController
-        presentViewController(memeEditorViewController, animated: true, completion: nil)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        /* Unwrap meme and set the image view to the memed image */
+        if let meme = meme {
+            detailImageView.image = meme.memedImage
+        }
     }
     
 }

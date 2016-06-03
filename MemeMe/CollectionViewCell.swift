@@ -12,4 +12,12 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    func isSelected(selected: Bool) {
+        if selected {
+            imageView.hidden = false
+        } else {
+            imageView.hidden = true
+        }
+    }
+    
 }
