@@ -8,16 +8,20 @@
 
 import UIKit
 
-struct Meme {
-    var topText: String
-    var bottomTexxt: String
-    var originalImage: UIImage
-    var memedImage: UIImage
+struct FontAttributes {
+    var fontSize: CGFloat = 40.0
+    var fontName = "HelveticaNeue-CondensedBlack"
+    var fontColor = UIColor.whiteColor()
+    var borderColor = UIColor.blackColor()
 }
 
-var savedMemes = [Meme]()
-var currentMeme: Meme!
-var memeIndex: Int = 0
+struct Meme {
+    var topText: String!
+    var bottomTexxt: String!
+    var originalImage: UIImage!
+    var memedImage: UIImage!
+    var fontAttributes: FontAttributes!
+}
 
 func ==(lhs: Meme, rhs: Meme) -> Bool {
     return lhs.memedImage == rhs.memedImage
@@ -25,13 +29,8 @@ func ==(lhs: Meme, rhs: Meme) -> Bool {
 
 struct CollectedMemes {
     
-    static func getMemeStorage() -> AppDelegate {
-        let object = UIApplication.sharedApplication().delegate
-        return object as! AppDelegate
-    }
-    
     static var allMemes: [Meme] {
-        return getMemeStorage().savedMemes
+        return getMemeStorage().memes
     }
     
     static func getMeme(atIndex index: Int) -> Meme {
@@ -49,19 +48,24 @@ struct CollectedMemes {
     }
     
     static func add(meme: Meme) {
-        getMemeStorage().savedMemes.append(meme)
+        getMemeStorage().memes.append(meme)
     }
     
     static func update(atIndex index: Int, withMeme meme: Meme) {
-        getMemeStorage().savedMemes[index] = meme
+        getMemeStorage().memes[index] = meme
     }
     
     static func remove(atIndex index: Int) {
-        getMemeStorage().savedMemes.removeAtIndex(index)
+        getMemeStorage().memes.removeAtIndex(index)
     }
     
     static func count() -> Int {
-        return getMemeStorage().savedMemes.count
+        return getMemeStorage().memes.count
+    }
+    
+    static func getMemeStorage() -> AppDelegate {
+        let object = UIApplication.sharedApplication().delegate
+        return object as! AppDelegate
     }
     
 }

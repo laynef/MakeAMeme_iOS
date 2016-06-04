@@ -11,6 +11,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var selectedImageView: UIImageView!
     
     func isSelected(selected: Bool) {
         if selected {

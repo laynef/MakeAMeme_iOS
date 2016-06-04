@@ -16,9 +16,18 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /* Unwrap meme and set the image view to the memed image */
+
         if let meme = meme {
             detailImageView.image = meme.memedImage
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMemeEditor" {
+            let editVC = segue.destinationViewController as! FirstViewController
+            editVC.editMeme = meme
+            
+            editVC.userIsEditing = true
         }
     }
     

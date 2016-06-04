@@ -10,8 +10,7 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
-    @IBOutlet weak var bottomTextTableCell: UIView!
-    @IBOutlet weak var topTextTableCell: UILabel!
+    @IBOutlet weak var textTableCell: UILabel!
     @IBOutlet weak var tableCellImage: UIImageView!
 
 }

@@ -18,7 +18,6 @@ class MemeTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem()
     }
     
-    /* If no saved Memes, present the Meme Creator when view will appear */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -34,7 +33,6 @@ class MemeTableViewController: UITableViewController {
     
     /* Present the meme creator with cancel button enabled */
     @IBAction func didPressAdd(sender: AnyObject) {
-        /* Programmatic segue presents the MemeEditor in creation mode */
         let object: AnyObject = storyboard!.instantiateViewControllerWithIdentifier("FirstViewController")
         let newMemeVC = object as! FirstViewController
         presentViewController(newMemeVC, animated: true, completion: {
@@ -46,7 +44,6 @@ class MemeTableViewController: UITableViewController {
         tableView!.reloadData()
     }
     
-    /* Delegate methods for editing the table view */
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -55,7 +52,6 @@ class MemeTableViewController: UITableViewController {
         return UITableViewCellEditingStyle.Delete
     }
     
-    /* Set editing and configure the UI accordingly */
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
@@ -65,21 +61,18 @@ class MemeTableViewController: UITableViewController {
     }
 }
 
-// MARK: - Extend MemeTableViewController for TableView data source & delegate methods
 extension MemeTableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    /* Set the number of rows in section based on count of Memes */
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CollectedMemes.count()
     }
     
-    /* Configure table view cells */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell", forIndexPath: indexPath)
         
         let meme = CollectedMemes.allMemes[indexPath.row]
         cell.textLabel!.text = "\(meme.topText) \(meme.bottomTexxt)"
@@ -87,18 +80,15 @@ extension MemeTableViewController {
         
         return cell
     }
-    
-    /* Allow tableView editing */
+
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        /* Delete Meme when selected */
         switch editingStyle {
         case .Delete:
             
             CollectedMemes.remove(atIndex: indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            
-            /* If there are no saved Memes, present the Meme Creator */
+
             if CollectedMemes.count() == 0 {
                 let object: AnyObject = storyboard!.instantiateViewControllerWithIdentifier("FirstViewController")
                 let memeCreatorVC = object as! FirstViewController
@@ -113,14 +103,11 @@ extension MemeTableViewController {
         
     }
     
-    /* Show detail View from selection */
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /* If not editing, perform segue defined in storyboard */
         if !tableView.editing {
             let object: AnyObject = storyboard!.instantiateViewControllerWithIdentifier("DetailViewController")
             let detailVC = object as! DetailViewController
             
-            /* Pass the data from the selected row to the detail view and present it */
             detailVC.meme = CollectedMemes.allMemes[indexPath.row]
             navigationController!.pushViewController(detailVC, animated: true)
         }
