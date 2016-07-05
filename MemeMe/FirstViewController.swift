@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ColorPickerDelegate {
+class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -18,7 +18,6 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var imagePickerController: UIImagePickerController!
     var memedImage: UIImage!
@@ -74,7 +73,6 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         shareButton.enabled = userIsEditing
         cancelButton.enabled = userIsEditing
-        saveButton.enabled = userIsEditing
     }
     
     func configureTextFields(textFields: [UITextField!]){
@@ -204,23 +202,6 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "fontPopoverSegue" {
-            let popoverVC = segue.destinationViewController as! TextSizesViewController
-            popoverVC.modalPresentationStyle = UIModalPresentationStyle.Popover
-            popoverVC.popoverPresentationController!.delegate = self
-            popoverVC.fontAttributes = fontAttributes
-        }
-        
-        if segue.identifier == "colorPickerPopoverSegue" {
-            let popoverVC = segue.destinationViewController as! ColorPickerViewController
-            popoverVC.delegate = self
-            popoverVC.modalPresentationStyle = UIModalPresentationStyle.Popover
-            popoverVC.popoverPresentationController!.delegate = self
-        }
-        
-    }
-    
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
     }
@@ -262,7 +243,6 @@ extension FirstViewController {
         imageView.image = image
         
         shareButton.enabled = userCanSave()
-        saveButton.enabled = userCanSave()
         cancelButton.enabled = true
     }
     
@@ -285,8 +265,6 @@ extension FirstViewController {
         selectedTextField = nil
         configureTextFields([textField])
         
-        saveButton.enabled = userCanSave()
-        
         textField.resignFirstResponder()
         return true
     }
@@ -304,7 +282,6 @@ extension FirstViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
 
-        saveButton.enabled = userCanSave()
         configureTextFields([topText, bottomText])
     }
     
@@ -313,7 +290,6 @@ extension FirstViewController {
         if selectedTextField == bottomText && view.frame.origin.y == 0.0 {
             
             view.frame.origin.y = -getKeyboardHeight(notification)
-            saveButton.enabled = false
             
         }
     }
@@ -321,7 +297,6 @@ extension FirstViewController {
 
     func keyboardWillHide(notification: NSNotification) {
         view.frame.origin.y = 0
-        saveButton.enabled = userCanSave()
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {

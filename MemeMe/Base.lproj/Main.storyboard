@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Meme Editor-->
@@ -35,36 +34,14 @@
                                             <action selector="pickImageFromCamera:" destination="VPL-yA-R1P" id="Qgq-hp-7Iv"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ODq-h2-rtP"/>
-                                    <barButtonItem image="photoAlbum" id="gsi-Bh-mLe">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ODq-h2-rtP"/>
+                                    <barButtonItem title="Album" id="gsi-Bh-mLe">
                                         <connections>
                                             <action selector="selectImageFromCameraRoll:" destination="VPL-yA-R1P" id="QPG-Ak-WWO"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="BDC-cl-7Ba"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="wG5-3J-6do"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="AS0-kg-B79"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="abQ-tu-6FM"/>
-                                    <barButtonItem image="colorPicker" id="Bav-x9-G9j">
-                                        <connections>
-                                            <segue destination="WEg-6Q-Vli" kind="popoverPresentation" popoverAnchorBarButtonItem="Bav-x9-G9j" id="ru6-p8-d0M">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="f15-b8-82p"/>
-                                    <barButtonItem image="fontSize" id="ufR-2B-zQ7">
-                                        <connections>
-                                            <segue destination="bvh-7m-bZU" kind="popoverPresentation" identifier="fontPopoverSegue" popoverAnchorBarButtonItem="ufR-2B-zQ7" id="pcl-bG-xh1">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bAH-vV-PIS"/>
                                 </items>
-                                <connections>
-                                    <outlet property="delegate" destination="ufR-2B-zQ7" id="huS-V3-7Ev"/>
-                                </connections>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPF-EW-NMp">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -78,22 +55,15 @@
                                                 <action selector="didTapShare:" destination="VPL-yA-R1P" id="Qbf-c6-n0r"/>
                                             </connections>
                                         </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="Item" systemItem="save" id="1dB-mc-D3r">
-                                                <connections>
-                                                    <action selector="saveMeme:" destination="VPL-yA-R1P" id="QXq-nB-zfL"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem systemItem="cancel" id="kSp-1k-XuO">
-                                                <connections>
-                                                    <action selector="didTapCancel:" destination="VPL-yA-R1P" id="iPJ-ju-5f4"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="kSp-1k-XuO">
+                                            <connections>
+                                                <action selector="didTapCancel:" destination="VPL-yA-R1P" id="iPJ-ju-5f4"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-Ea-4Uh">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-Ea-4Uh">
                                 <rect key="frame" x="0.0" y="94" width="600" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
@@ -140,7 +110,6 @@
                         <outlet property="cancelButton" destination="kSp-1k-XuO" id="n5v-yy-Afi"/>
                         <outlet property="imageView" destination="TMH-ZB-ihp" id="8oS-6P-m4q"/>
                         <outlet property="navBar" destination="vPF-EW-NMp" id="7uh-x7-kEK"/>
-                        <outlet property="saveButton" destination="1dB-mc-D3r" id="Vfs-Zc-vyH"/>
                         <outlet property="shareButton" destination="670-rL-8Dn" id="XFj-RY-jZS"/>
                         <outlet property="topText" destination="Hgc-Ea-4Uh" id="N0J-PL-ceD"/>
                         <segue destination="RHO-RN-xFo" kind="unwind" identifier="unwindMemeEditor" unwindAction="unwindMemeEditor:" id="xGc-lG-bVx"/>
@@ -154,7 +123,6 @@
         <!--Saved Memes-->
         <scene sceneID="y7y-3B-bYX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u5u-gy-Shs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController storyboardIdentifier="MemeCollectionViewController" title="Saved Memes" id="mvU-y6-eYz" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="La7-OG-Q3E">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -176,7 +144,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TXe-UX-D1u">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="140"/>
                                         </imageView>
-                                        <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="bx1-go-c18">
+                                        <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="bx1-go-c18">
                                             <rect key="frame" x="8" y="33" width="74" height="73"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="73" id="CH7-dg-Ddp"/>
@@ -228,6 +196,7 @@
                         <segue destination="rCn-6I-UOJ" kind="show" identifier="showMemeDetail" id="yIe-S6-LKo"/>
                     </connections>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5u-gy-Shs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="852" y="926"/>
         </scene>
@@ -287,102 +256,6 @@
             </objects>
             <point key="canvasLocation" x="-535" y="555"/>
         </scene>
-        <!--Text Sizes View Controller-->
-        <scene sceneID="Kbx-aw-RWe">
-            <objects>
-                <viewController storyboardIdentifier="TextSizesViewController" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="formSheet" id="bvh-7m-bZU" customClass="TextSizesViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="slH-6b-N7m"/>
-                        <viewControllerLayoutGuide type="bottom" id="9Je-ga-ajd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1YJ-if-dUm">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jqp-6a-thP">
-                                <rect key="frame" x="16" y="8" width="268" height="236"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovd-jE-vOr">
-                                <rect key="frame" x="0.0" y="252" width="26" height="40"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="12" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SPi-q1-aXQ">
-                                <rect key="frame" x="32" y="247" width="236" height="41"/>
-                                <color key="minimumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="thumbTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="didChangeSlider:" destination="bvh-7m-bZU" eventType="valueChanged" id="UdH-rR-gxb"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mf-gy-yen">
-                                <rect key="frame" x="274" y="252" width="26" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="26" id="8BJ-cP-gnh"/>
-                                    <constraint firstAttribute="height" constant="40" id="QQP-Q1-Qrt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="ovd-jE-vOr" firstAttribute="height" secondItem="SPi-q1-aXQ" secondAttribute="height" id="1rh-dR-I3J"/>
-                            <constraint firstItem="Jqp-6a-thP" firstAttribute="centerX" secondItem="1YJ-if-dUm" secondAttribute="centerX" id="3oJ-lB-Yz0"/>
-                            <constraint firstItem="9Je-ga-ajd" firstAttribute="top" secondItem="SPi-q1-aXQ" secondAttribute="bottom" constant="13" id="BB0-ao-kSe"/>
-                            <constraint firstAttribute="trailing" secondItem="9mf-gy-yen" secondAttribute="trailing" id="Fha-OZ-Bhw"/>
-                            <constraint firstItem="SPi-q1-aXQ" firstAttribute="centerX" secondItem="1YJ-if-dUm" secondAttribute="centerX" id="H56-Hy-q39"/>
-                            <constraint firstItem="SPi-q1-aXQ" firstAttribute="leading" secondItem="ovd-jE-vOr" secondAttribute="trailing" constant="8" symbolic="YES" id="IOD-cD-C3a"/>
-                            <constraint firstItem="9Je-ga-ajd" firstAttribute="top" secondItem="9mf-gy-yen" secondAttribute="bottom" constant="8" id="MKU-wa-ZUf"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="Jqp-6a-thP" secondAttribute="leading" id="SYI-rZ-Cmx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Jqp-6a-thP" secondAttribute="trailing" id="Xwx-cb-vxt"/>
-                            <constraint firstItem="Jqp-6a-thP" firstAttribute="top" secondItem="slH-6b-N7m" secondAttribute="bottom" constant="8" id="cLQ-oi-08N"/>
-                            <constraint firstItem="ovd-jE-vOr" firstAttribute="leading" secondItem="1YJ-if-dUm" secondAttribute="leading" id="heA-Xa-xYQ"/>
-                            <constraint firstItem="9mf-gy-yen" firstAttribute="top" secondItem="Jqp-6a-thP" secondAttribute="bottom" constant="8" symbolic="YES" id="jLB-0x-J3W"/>
-                            <constraint firstItem="9Je-ga-ajd" firstAttribute="top" secondItem="ovd-jE-vOr" secondAttribute="bottom" constant="8" id="mgf-zY-qhl"/>
-                            <constraint firstItem="9mf-gy-yen" firstAttribute="height" secondItem="SPi-q1-aXQ" secondAttribute="height" id="rZv-DA-miW"/>
-                            <constraint firstItem="9mf-gy-yen" firstAttribute="leading" secondItem="SPi-q1-aXQ" secondAttribute="trailing" constant="8" symbolic="YES" id="xHW-3J-x2Z"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="300"/>
-                    <connections>
-                        <outlet property="fontPicker" destination="Jqp-6a-thP" id="uBD-hm-uMC"/>
-                        <outlet property="fontSizeSlider" destination="SPi-q1-aXQ" id="DAC-41-up6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gR2-7L-vzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2388" y="1228"/>
-        </scene>
-        <!--Color Picker View Controller-->
-        <scene sceneID="BXJ-3m-7CC">
-            <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="formSheet" id="WEg-6Q-Vli" customClass="ColorPickerViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HwB-Fc-0IS"/>
-                        <viewControllerLayoutGuide type="bottom" id="FnW-aM-1ex"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mAh-xv-aOY" customClass="SwiftColorView" customModule="MemeMe" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="400"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gni-bn-nPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2051" y="1278"/>
-        </scene>
         <!--Meme Detail-->
         <scene sceneID="bm8-ss-b1w">
             <objects>
@@ -418,7 +291,7 @@
                     <navigationItem key="navigationItem" title="Meme Detail" id="HR4-tR-gEb">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="BcE-4k-JFq">
                             <connections>
-                                <segue destination="VPL-yA-R1P" kind="modal" identifier="showMemeEditor" id="saS-zD-jdD"/>
+                                <segue destination="VPL-yA-R1P" kind="presentation" identifier="showMemeEditor" id="saS-zD-jdD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -502,11 +375,8 @@
     <resources>
         <image name="check" width="96" height="96"/>
         <image name="collection" width="30" height="30"/>
-        <image name="colorPicker" width="22" height="22"/>
-        <image name="fontSize" width="22" height="22"/>
-        <image name="photoAlbum" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MbH-4j-Lnd"/>
+        <segue reference="yIe-S6-LKo"/>
     </inferredMetricsTieBreakers>
 </document>
